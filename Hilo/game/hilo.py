@@ -15,8 +15,14 @@ class Hilo:
         Args:
             self(Hilo): An instance of Hilo
         """
-        
+        self.value = 0
 
-    
+    def shuffle(self):
+        """Generates a new random value and calculates the points for the card.
+        
+        Args:
+            self (Hilo): An instance of Hilo.
+        """
+        self.value = random.randint(1, 13)
 
     
