@@ -1,4 +1,5 @@
-from hilo import Hilo
+from pickletools import read_unicodestring1
+from game.hilo import Hilo
 
 class Director:
     """Directs the game
@@ -19,6 +20,7 @@ class Director:
         self.card = []
         self.score = 300
         # self.total_score = 300
+        self.is_playing = True
         self.card_values = []
 
         for i in range(2):
@@ -31,9 +33,10 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        self.update_cards()
-        self.get_input()
-        self.do_output()
+        while self.is_playing:
+            self.update_cards()
+            self.get_input()
+            self.do_output()
         
     def update_cards(self):
         """Starts the game by running the main game loop
@@ -46,7 +49,7 @@ class Director:
             card.shuffle()
             self.card_values.append(card.value)
         self.card_values = [int(i) for i in self.card_values]
-        print(f"The card is {self.card_values[0]}")
+        print(f"\nThe card is {self.card_values[0]}")
 
     def get_input(self):
         """Starts the game by running the main game loop
@@ -76,5 +79,14 @@ class Director:
         """
         print(f"Next card was: {self.card_values[1]}")
         print(f"Score is: {self.score}")
+        is_playing = self.continue_game(self.score)
+    
+    def continue_game(self,score):
+        if score > 0: 
+            play_again = input("Play again?[y/n] ")
+            self.is_playing = True if (play_again == "y" or play_again == "yes") else False
+        elif score <= 0 :
+            self.is_playing = False
+            print("Game Over")
 
     
