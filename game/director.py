@@ -1,4 +1,4 @@
-from game.hilo import Hilo
+from hilo import Hilo
 
 class Director:
     """Directs the game
