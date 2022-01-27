@@ -5,9 +5,9 @@ class Director:
     
     Attributes:
         card (List[card]): A list of Card instances.
+        score (int): The score in the game.
         is_playing (boolean): Whether or not the game is being played.
-        score (int): The score for one round of play.
-        total_score (int): The score for the entire game.
+        card_values (List[card.value]): A list of Card values
     """
 
     def __init__(self):
@@ -18,7 +18,6 @@ class Director:
         """
         self.card = []
         self.score = 300
-        # self.total_score = 300
         self.is_playing = True
         self.card_values = []
 
@@ -38,7 +37,7 @@ class Director:
             self.do_output()
         
     def update_cards(self):
-        """Starts the game by running the main game loop
+        """Updates the card by resetting the card values in each instances and prints the first value in the list.
         
         Args:
             self (Director): an instance of Director.
@@ -53,7 +52,7 @@ class Director:
         print(f"\nThe card is {self.card_values[0]}")
 
     def get_input(self):
-        """Starts the game by running the main game loop
+        """Gets input from the user and gives score base on the user input.
         
         Args:
             self (Director): an instance of Director.
@@ -61,23 +60,11 @@ class Director:
         answer = input("Higher or lower? [h/l] ")
         if answer == 'h':
             self.score += 100 if self.card_values[1] > self.card_values[0] else -75 
-            """
-            if self.card_values[1] > self.card_values[0]:
-                self.score += 100
-            else:
-                self.score -= 75 """
         elif answer == 'l':
             self.score += 100 if self.card_values[1] < self.card_values[0] else -75
-            """
-            if self.card_values[1] < self.card_values[0]:
-                self.score += 100
-            else:
-                self.score -= 75 """
-        else:
-            self.score -= 75
 
     def do_output(self):
-        """Starts the game by running the main game loop
+        """Prints the second card value and the score.
         
         Args:
             self (Director): an instance of Director.
@@ -91,6 +78,7 @@ class Director:
         
         Args:
             self(Director): an instance of director
+            score (int): The score in the game
         """
         play_again = ""
         if score > 0: 
