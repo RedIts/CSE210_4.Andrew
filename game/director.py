@@ -44,6 +44,8 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        self.card_values = []
+        
         for i in range(len(self.card)):
             card = self.card[i]
             card.shuffle()
@@ -79,9 +81,10 @@ class Director:
         """
         print(f"Next card was: {self.card_values[1]}")
         print(f"Score is: {self.score}")
-        is_playing = self.continue_game(self.score)
+        self.continue_game(self.score)
     
     def continue_game(self,score):
+        play_again = ""
         if score > 0: 
             play_again = input("Play again?[y/n] ")
             self.is_playing = True if (play_again == "y" or play_again == "yes") else False
