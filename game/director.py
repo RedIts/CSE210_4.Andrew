@@ -1,4 +1,3 @@
-from pickletools import read_unicodestring1
 from game.hilo import Hilo
 
 class Director:
