@@ -61,15 +61,19 @@ class Director:
         """
         answer = input("Higher or lower? [h/l] ")
         if answer == 'h':
+            self.score += 100 if self.card_values[1] > self.card_values[0] else -75 
+            """
             if self.card_values[1] > self.card_values[0]:
                 self.score += 100
             else:
-                self.score -= 75
+                self.score -= 75 """
         elif answer == 'l':
+            self.score += 100 if self.card_values[1] < self.card_values[0] else -75
+            """
             if self.card_values[1] < self.card_values[0]:
                 self.score += 100
             else:
-                self.score -= 75
+                self.score -= 75 """
         else:
             self.score -= 75
 
