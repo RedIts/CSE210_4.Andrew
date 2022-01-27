@@ -19,6 +19,7 @@ class Director:
         self.card = []
         self.score = 300
         # self.total_score = 300
+        self.is_playing = True
         self.card_values = []
 
         for i in range(2):
@@ -31,9 +32,10 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        self.update_cards()
-        self.get_input()
-        self.do_output()
+        while self.is_playing:
+            self.update_cards()
+            self.get_input()
+            self.do_output()
         
     def update_cards(self):
         """Starts the game by running the main game loop
@@ -41,12 +43,14 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        self.card_values = []
+
         for i in range(len(self.card)):
             card = self.card[i]
             card.shuffle()
             self.card_values.append(card.value)
         self.card_values = [int(i) for i in self.card_values]
-        print(f"The card is {self.card_values[0]}")
+        print(f"\nThe card is {self.card_values[0]}")
 
     def get_input(self):
         """Starts the game by running the main game loop
@@ -56,15 +60,19 @@ class Director:
         """
         answer = input("Higher or lower? [h/l] ")
         if answer == 'h':
+            self.score += 100 if self.card_values[1] > self.card_values[0] else -75 
+            """
             if self.card_values[1] > self.card_values[0]:
                 self.score += 100
             else:
-                self.score -= 75
+                self.score -= 75 """
         elif answer == 'l':
+            self.score += 100 if self.card_values[1] < self.card_values[0] else -75
+            """
             if self.card_values[1] < self.card_values[0]:
                 self.score += 100
             else:
-                self.score -= 75
+                self.score -= 75 """
         else:
             self.score -= 75
 
@@ -76,5 +84,20 @@ class Director:
         """
         print(f"Next card was: {self.card_values[1]}")
         print(f"Score is: {self.score}")
-
+        self.continue_game(self.score)
     
+    def continue_game(self,score):
+        """ Asks if the player wants to continue
+        
+        Args:
+            self(Director): an instance of director
+        """
+        play_again = ""
+        if score > 0: 
+            play_again = input("Play again?[y/n] ")
+            if (play_again == "no" or play_again == "n") : print("Game Over")
+            self.is_playing = True if (play_again == "y" or play_again == "yes") else False
+
+        elif score <= 0 :
+            self.is_playing = False
+            print("Game Over")
