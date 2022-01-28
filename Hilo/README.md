@@ -26,7 +26,7 @@ root
 
 ##Authors
 Ezequiel Alguera Mercado
-Naomi Gonzalez Leon
+Naomi Gonzalez Leon - gon21043@byui.edu
 Erwin Jared Larios
 Mario Antonio Quinonez
 Dean Redito
