@@ -29,4 +29,4 @@ Ezequiel Alguera Mercado
 Naomi Gonzalez Leon - gon21043@byui.edu
 Erwin Jared Larios
 Mario Antonio Quinonez
-Dean Redito
+Dean Redito - red21009@byui.edu
