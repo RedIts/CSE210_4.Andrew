@@ -5,9 +5,9 @@ class Director:
     
     Attributes:
         card (List[card]): A list of Card instances.
-        score (int): The score in the game.
         is_playing (boolean): Whether or not the game is being played.
-        card_values (List[card.value]): A list of Card values
+        score (int): The score for one round of play.
+        total_score (int): The score for the entire game.
     """
 
     def __init__(self):
@@ -37,7 +37,7 @@ class Director:
             self.do_output()
         
     def update_cards(self):
-        """Updates the card by resetting the card values in each instances and prints the first value in the list.
+        """Starts the game by running the main game loop
         
         Args:
             self (Director): an instance of Director.
@@ -48,23 +48,31 @@ class Director:
             card = self.card[i]
             card.shuffle()
             self.card_values.append(card.value)
+
         self.card_values = [int(i) for i in self.card_values]
         print(f"\nThe card is {self.card_values[0]}")
 
     def get_input(self):
-        """Gets input from the user and gives score base on the user input.
+        """Starts the game by running the main game loop
         
         Args:
             self (Director): an instance of Director.
         """
-        answer = input("Higher or lower? [h/l] ")
+
+        answer = input("Higher or lower? [h/l] ").lower().strip()
+
         if answer == 'h':
             self.score += 100 if self.card_values[1] > self.card_values[0] else -75 
+
         elif answer == 'l':
             self.score += 100 if self.card_values[1] < self.card_values[0] else -75
+        else:
+            print("Oops! it looks like you din't select the right choise. Remember to use 'h' for HIGHER or 'l' for LOWER")
+            self.get_input()
+
 
     def do_output(self):
-        """Prints the second card value and the score.
+        """Starts the game by running the main game loop
         
         Args:
             self (Director): an instance of Director.
@@ -78,13 +86,21 @@ class Director:
         
         Args:
             self(Director): an instance of director
-            score (int): The score in the game
         """
         play_again = ""
         if score > 0: 
-            play_again = input("Play again?[y/n] ")
-            if (play_again == "no" or play_again == "n") : print("Game Over")
-            self.is_playing = True if (play_again == "y" or play_again == "yes") else False
+            play_again = input("Play again?[y/n] ").lower().strip()
+
+            if (play_again == "no" or play_again == "n") : 
+                print("Game Over")
+                self.is_playing = False
+            
+            elif (play_again == "y" or play_again == "yes") :
+                self.is_playing = True  
+                
+            else: 
+                print("Oops! Remember to mar y/n to continue playing or not")
+                self.continue_game(score)
 
         elif score <= 0 :
             self.is_playing = False
