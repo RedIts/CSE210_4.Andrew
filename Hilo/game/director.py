@@ -1,3 +1,4 @@
+from ast import Try
 from game.hilo import Hilo
 
 class Director:
@@ -58,17 +59,20 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        try:
+            answer = input("Higher or lower? [h/l] ").lower().strip()
 
-        answer = input("Higher or lower? [h/l] ").lower().strip()
+            if answer == 'h':
+                self.score += 100 if self.card_values[1] > self.card_values[0] else -75 
 
-        if answer == 'h':
-            self.score += 100 if self.card_values[1] > self.card_values[0] else -75 
+            elif answer == 'l':
+                self.score += 100 if self.card_values[1] < self.card_values[0] else -75
 
-        elif answer == 'l':
-            self.score += 100 if self.card_values[1] < self.card_values[0] else -75
-        else:
+            else:
+                raise Exception
+
+        except Exception:
             print("Oops! it looks like you din't select the right choise. Remember to use 'h' for HIGHER or 'l' for LOWER")
-            self.get_input()
 
 
     def do_output(self):
@@ -87,21 +91,24 @@ class Director:
         Args:
             self(Director): an instance of director
         """
-        play_again = ""
-        if score > 0: 
-            play_again = input("Play again?[y/n] ").lower().strip()
+        try:
+            play_again = ""
+            if score > 0: 
+                play_again = input("Play again?[y/n] ").lower().strip()
 
-            if (play_again == "no" or play_again == "n") : 
-                print("Game Over")
-                self.is_playing = False
-            
-            elif (play_again == "y" or play_again == "yes") :
-                self.is_playing = True  
+                if (play_again == "no" or play_again == "n") : 
+                    print("Game Over")
+                    self.is_playing = False
                 
-            else: 
-                print("Oops! Remember to mar y/n to continue playing or not")
-                self.continue_game(score)
+                elif (play_again == "y" or play_again == "yes") :
+                    self.is_playing = True  
 
-        elif score <= 0 :
-            self.is_playing = False
-            print("Game Over")
+                else:
+                    raise Exception
+
+            elif score <= 0 :
+                self.is_playing = False
+                print("Game Over")
+    
+        except Exception:
+            print("Oops! Remember to mar y/n to continue playing or not")
