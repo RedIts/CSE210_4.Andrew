@@ -59,8 +59,10 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        try:
+        valid_input = True
+        while valid_input:
             answer = input("Higher or lower? [h/l] ").lower().strip()
+            valid_input = False
 
             if answer == 'h':
                 self.score += 100 if self.card_values[1] > self.card_values[0] else -75 
@@ -69,10 +71,8 @@ class Director:
                 self.score += 100 if self.card_values[1] < self.card_values[0] else -75
 
             else:
-                raise Exception
-
-        except Exception:
-            print("Oops! it looks like you din't select the right choise. Remember to use 'h' for HIGHER or 'l' for LOWER")
+                print("Oops! it looks like you din't select the right choise. Remember to use 'h' for HIGHER or 'l' for LOWER")
+                valid_input = True
 
 
     def do_output(self):
@@ -91,8 +91,12 @@ class Director:
         Args:
             self(Director): an instance of director
         """
-        try:
+        valid_input = True
+        while valid_input:
+            
             play_again = ""
+            valid_input = False
+
             if score > 0: 
                 play_again = input("Play again?[y/n] ").lower().strip()
 
@@ -104,11 +108,9 @@ class Director:
                     self.is_playing = True  
 
                 else:
-                    raise Exception
+                    print("Oops! Remember to mar y/n to continue playing or not")
+                    valid_input = True
 
             elif score <= 0 :
                 self.is_playing = False
                 print("Game Over")
-    
-        except Exception:
-            print("Oops! Remember to mar y/n to continue playing or not")
